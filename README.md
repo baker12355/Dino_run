@@ -26,7 +26,7 @@
 
 
 > 取得80x80x4的State後先進行convolution與max polling，在經過flatten與全連接層，最後輸出兩個數字，用來表示Q值，我們通常會選擇大者為下一個採取的Ation。
-![image]((https://github.com/baker12355/Dino_run/blob/master/convolution.png))
+![image](https://github.com/baker12355/Dino_run/blob/master/convolution.png)
 
 #  訓練細節
 
