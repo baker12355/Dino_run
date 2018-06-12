@@ -26,22 +26,22 @@
 
 
 > 取得80x80x4的State後先進行convolution與max polling，在經過flatten與全連接層，最後輸出兩個數字，用來表示Q值，我們通常會選擇大者為下一個採取的Ation。
-![image](https://github.com/baker12355/Dino_run/blob/master/convolution.png)
+![image]((https://github.com/baker12355/Dino_run/blob/master/convolution.png))
 
 #  訓練細節
 
-> 一開始讓小恐龍進行100次的觀察，獲得100組的(S,A,R,St+1,Terminal)。之後每觀察一組資料後便會從Replay Buffer隨機抽出32組資料出來訓練。具體獎勵生存的方式為0.1+γxMax(Q1,Q2)，γ=0.99，用來解決Credit Assignment的問題:我們不知道目前的reward是否確實是因為上一個Action完全造成的。因此設定γ。
+> 一開始讓小恐龍進行100次的觀察，獲得100組的(S,A,R,St+1,Terminal)。之後每觀察一組資料後便會從Replay Buffer隨機抽出32組資料出來訓練。具體獎勵生存的方式為0.1+γxMax(Q1,Q2)，γ=0.99，用來解決Credit Assignment的問題:我們不知道目前的reward是否確實是因為上一個Action完全造成的。因此設定γ。另外還有設定隨著時間遞減的隨機動作因子epsilon，如此一來可以增加探索的可能性。
+
+
+#  成果與分析
+
+![image](https://github.com/baker12355/Dino_run/blob/master/mva_15.png)
+> 上圖為moving average=15，可以看出雖然在中間部分成績有明顯的突出，但是右段卻下跌，我推測模型的不穩定性是因為replay buffer的資料新增與刪減的關係，記憶體的保存觀察組數為五萬組，多餘的會從最舊的開始移除，按照機率來說先進queue的資料會訓練的比較多次，因此在這個時候容易有過度擬合的現象，因此資料的fitting會較明顯，而隨著時間push新資料，模型需要擬合新資料，便會造成分數震盪。這種狀況我猜想只有在資料量不足的情況下才會發生，因為我是使用CPU訓練，礙於時間關係沒辦法完整的分析。成績最高分達到3千7百分。
 
 
 
 
-
-
-
-
-
-
-
+# 問題與討論
 
 1. What kind of RL algorithms did you use? value-based, policy-based, model-based? why? (10%)
 2. This algorithms is off-policy or on-policy? why? (10%)
@@ -49,11 +49,9 @@
 
 回答1: value-based algorithm, DQN使用神經網路作為Q-table的依據，在這邊我們輸出只有兩個(不跳與跳)，而神經網路輸出大值為即將採取的動作，故只比較Q-value大小，為values-based。
 回答2:這是一個off-policy的algorithms，因為在選擇動作時加入了一個隨機動作的可能性，已達到更好的探索空間。
-回答3:
+回答3:這裡處理資料相依的問題是使用固定size的replay buffer加上隨機抽樣的批次訓練，當buffer size大於5萬時便會pop最舊的資料。
 
 
 
 
-
-
-https://www.youtube.com/watch?v=W8XF3ME8G2I&index=34&list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&t=0s
+參考自:https://blog.paperspace.com/dino-run/
