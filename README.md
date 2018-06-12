@@ -4,22 +4,35 @@
 ![image](https://github.com/baker12355/Dino_run/blob/master/dino.gif)
 
 
-# 強化學習
+# 強化學習概述
 ##  環境描述
 
 > 1.觀察 2.選擇行為 3.行動 4.獲得reward 
 ![image](https://github.com/baker12355/Dino_run/blob/master/RL_illustration_1.PNG)
 
-以示意圖而言Agent觀察環境，並且行動打翻水杯，獲得一個負向的reward。而這次的動作會影響環境，下一個State會從打翻水杯後開始，若此時選取動作:清理打翻的水杯，則會獲得一個正向的reward。
+> 以示意圖而言Agent觀察環境，並且行動打翻水杯，獲得一個負向的reward。而這次的動作會影響環境，下一個State會從打翻水杯後開始，若此時選取動作:清理打翻> > 的水杯，則會獲得一個正向的reward。
 ![image](https://github.com/baker12355/Dino_run/blob/master/RL_illustration_2.PNG)
 
 
 ## 訓練方式
 
-> 首先讓Agent在空間中探索，並且記錄每一次的探索經驗(S,A,R,St+1,Terminal)，狀態(time=t)、動作、報酬、動作後狀態(time=t+1)、是否終止。反覆重複N次作> 為訓練資料，其中每次的動作是由Q-Table來決定的，我們訓練的目的即為最佳化Q-Table使得我們的Agent可以得到最多的reward。
+> 首先讓Agent在空間中探索，並且記錄每一次的探索經驗(S,A,R,St+1,Terminal)，狀態(time=t)、動作、報酬、動作後狀態(time=t+1)、是否終止。反覆重複N次作> 為訓練資料，其中每次的動作是由Q-Table來決定的，依照環境只要生存就會提高獎勵，提高方式為0.1+max(Q1,Q2)xGamma，最後在利用這些經驗進行監督是學習，最佳化Q-Table使得Agent可以傾向於得到最多的reward。
+
 ![image](https://github.com/baker12355/Dino_run/blob/master/q-table.png)
 
+# 應用Dino-run
 
+> Q-Table的設置，由於狀態是由影像構成的，無法一一窮舉成Q-Table，故使用類神經網路來幫助我們達成Q-Table的近似，又影像為連續的相片，我們每次擷取連續的四張為一組State Input。細節上我們將原圖進行ROI(region of interst)擷取出小恐龍前方的障礙物的區塊，因為現實讓我們只在乎障礙物與畫面左邊界的距離，到達某個距離便是跳躍的關鍵。(80*80*4)
+![image](https://github.com/baker12355/Dino_run/blob/master/grey_scale.png)
+
+
+> 取得80x80x4的State後先進行convolution與max polling，在經過flatten與全連接層，最後輸出兩個數字，用來表示Q值，我們通常會選擇大者為下一個採取的Ation。
+![image](https://github.com/baker12355/Dino_run/blob/master/convolution.png)
+
+
+
+
+## 一開始讓小恐龍進行100次的觀察，獲得100組的(S,A,R,St+1,Terminal)。
 
 1. What kind of RL algorithms did you use? value-based, policy-based, model-based? why? (10%)
 2. This algorithms is off-policy or on-policy? why? (10%)
