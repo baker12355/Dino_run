@@ -21,7 +21,7 @@
 
 # 應用Dino-run
 
-> Q-Table的設置，由於狀態是由影像構成的，無法一一窮舉成Q-Table，故使用類神經網路來幫助我們達成Q-Table的近似，又影像為連續的相片，我們每次擷取連續的四張為一組State Input。細節上我們將原圖進行ROI(region of interst)擷取出小恐龍前方的障礙物的區塊，因為現實讓我們只在乎障礙物與畫面左邊界的距離，到達某個距離便是跳躍的關鍵。(80*80*4)
+> Q-Table的設置，由於狀態是由影像構成的，無法一一窮舉成Q-Table，故使用類神經網路來幫助我們達成Q-Table的近似，又影像為連續的相片，我們每次擷取連續的四張為一組State Input。細節上我們將原圖進行ROI(region of interst)擷取出小恐龍前方的障礙物的區塊，因為現實讓我們只在乎障礙物與畫面左邊界的距離，到達某個距離便是跳躍的關鍵。(80x80x4)
 ![image](https://github.com/baker12355/Dino_run/blob/master/grey_scale.png)
 
 
