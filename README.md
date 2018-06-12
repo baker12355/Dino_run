@@ -53,5 +53,5 @@
 
 
 
-
+更詳細的細節請參考程式碼:https://github.com/baker12355/Dino_run
 參考自:https://blog.paperspace.com/dino-run/
