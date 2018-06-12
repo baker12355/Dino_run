@@ -16,8 +16,7 @@
 
 ## 訓練方式
 
-> 首先讓Agent在空間中探索，並且記錄每一次的探索經驗(S,A,R,St+1,Terminal)，狀態(time=t)、動作、報酬、動作後狀態(time=t+1)、是否終止。反覆重複N次作> 為訓練資料，其中每次的動作是由Q-Table來決定的，依照環境只要生存就會提高獎勵，提高方式為0.1+max(Q1,Q2)xGamma，最後在利用這些經驗進行監督是學習，最佳化Q-Table使得Agent可以傾向於得到最多的reward。
-
+> 首先讓Agent在空間中探索，並且記錄每一次的探索經驗(S,A,R,St+1,Terminal)，狀態(time=t)、動作、報酬、動作後狀態(time=t+1)、是否終止。反覆重複N次作> 為訓練資料，其中每次的動作是由Q-Table來決定的，依照環境只要生存就會提高獎勵，最後在利用這些經驗進行監督是學習，最佳化Q-Table使得Agent可以傾向於得到最多的reward。
 ![image](https://github.com/baker12355/Dino_run/blob/master/q-table.png)
 
 # 應用Dino-run
@@ -29,10 +28,20 @@
 > 取得80x80x4的State後先進行convolution與max polling，在經過flatten與全連接層，最後輸出兩個數字，用來表示Q值，我們通常會選擇大者為下一個採取的Ation。
 ![image](https://github.com/baker12355/Dino_run/blob/master/convolution.png)
 
+#  訓練細節
+
+> 一開始讓小恐龍進行100次的觀察，獲得100組的(S,A,R,St+1,Terminal)。之後每觀察一組資料後便會從Replay Buffer隨機抽出32組資料出來訓練。具體獎勵生存的方式為0.1+γxMax(Q1,Q2)，γ=0.99，用來解決Credit Assignment的問題:我們不知道目前的reward是否確實是因為上一個Action完全造成的。因此設定γ。
 
 
 
-## 一開始讓小恐龍進行100次的觀察，獲得100組的(S,A,R,St+1,Terminal)。
+
+
+
+
+
+
+
+
 
 1. What kind of RL algorithms did you use? value-based, policy-based, model-based? why? (10%)
 2. This algorithms is off-policy or on-policy? why? (10%)
