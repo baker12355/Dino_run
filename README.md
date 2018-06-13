@@ -10,7 +10,7 @@
 > 1.觀察 2.選擇行為 3.行動 4.獲得reward 
 ![image](https://github.com/baker12355/Dino_run/blob/master/RL_illustration_1.PNG)
 
-> 以示意圖而言Agent觀察環境，並且行動打翻水杯，獲得一個負向的reward。而這次的動作會影響環境，下一個State會從打翻水杯後開始，若此時選取動作:清理打翻> > 的水杯，則會獲得一個正向的reward。
+> 以示意圖而言Agent觀察環境，並且行動打翻水杯，獲得一個負向的reward。而這次的動作會影響環境，下一個State會從打翻水杯後開始，若此時選取動作:清理打翻 的水杯，則會獲得一個正向的reward。
 ![image](https://github.com/baker12355/Dino_run/blob/master/RL_illustration_2.PNG)
 
 
@@ -25,7 +25,7 @@
 ![image](https://github.com/baker12355/Dino_run/blob/master/grey_scale.png)
 
 
-> 取得80x80x4的State後先進行convolution與max polling，在經過flatten與全連接層，最後輸出兩個數字，用來表示Q值，我們通常會選擇大者為下一個採取的Ation。
+> 取得80x80x4的State後先進行convolution與max polling，在經過flatten與全連接層，最後輸出兩個數字，用來表示Q值，我們通常會選擇大者為下一個採取的Action。
 ![image](https://github.com/baker12355/Dino_run/blob/master/convolution.png)
 
 #  訓練細節
