@@ -199,7 +199,7 @@ def init_cache():
 
 '''Call only once to init file structure
 '''
-#init_cache()
+init_cache()
 
 def buildmodel():
     print("Now we build the model")
